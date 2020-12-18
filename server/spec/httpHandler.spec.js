@@ -29,9 +29,14 @@ describe('server responses', () => {
     httpHandler.router(req, res);
     expect(res._responseCode).to.equal(200);
     expect(res._ended).to.equal(true);
-    // expect(res._data).to.equal('left')
+    const swimCommand = res._data.toString();
+    const commands = ['right', 'left', 'up', 'down'];const check = commands.includes(swimCommand);
+    expect(check).to.equal(true)
+
     done();
   });
+
+  //when server receives get request its sending back a swim command (right, left up down);
 
   xit('should respond with 404 to a GET request for a missing background image', (done) => {
     httpHandler.backgroundImageFile = path.join('.', 'spec', 'missing.jpg');
