@@ -28,7 +28,8 @@ describe('server responses', () => {
     httpHandler.initialize(queue)
 
     const commands = ['right', 'left', 'up', 'down'];
-    queue.enqueue('up')
+    index = Math.floor(Math.random() * commands.length);
+    queue.enqueue(commands[index])
 
     httpHandler.router(req, res);
 
@@ -80,13 +81,13 @@ describe('server responses', () => {
     });
   });
 
-  xit('should send back the previously saved image', (done) => {
+  it('should send back the previously saved image', (done) => {
     fs.readFile(postTestFile, (err, fileData) => {
       httpHandler.backgroundImageFile = path.join('.', 'spec', 'temp.jpg');
-      let post = server.mock('FILL_ME_IN', 'POST', fileData);
+      let post = server.mock('/background.jpg', 'POST', fileData);
 
       httpHandler.router(post.req, post.res, () => {
-        let get = server.mock('FILL_ME_IN', 'GET');
+        let get = server.mock('/background.jpg', 'GET');
         httpHandler.router(get.req, get.res, () => {
           expect(Buffer.compare(fileData, get.res._data)).to.equal(0);
           done();
