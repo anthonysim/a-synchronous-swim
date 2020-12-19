@@ -3,6 +3,7 @@ const path = require('path');
 const headers = require('./cors');
 const multipart = require('./multipartUtils');
 const url = require('url')
+const kepress = require('./keypressHandler.js')
 // const SwimTeam = require("client/js/swimTeam.js")
 
 // Path for the background image ///////////////////////
@@ -20,7 +21,7 @@ module.exports.router = (req, res, next = ()=>{}) => {
       var commands = ['left', 'right', 'up', 'down'];
       var random = Math.floor(Math.random() * 4)
       res.writeHead(200, headers)
-      res.write(commands[random]);
+      res.write(messageQueue.dequeue());
       res.end();
     }
 

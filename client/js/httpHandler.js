@@ -15,7 +15,8 @@
         console.log(command);
         SwimTeam.move(command);
 
-        setTimeout(randomCommand, 2000);
+        // setTimeout(randomCommand, 2000);
+
       },
       error: (err) => console.error(err)
     });
@@ -30,7 +31,7 @@
   // Note: remember to fix the URL below.
   /////////////////////////////////////////////////////////////////////
 
-  const ajaxFileUplaod = (file) => {
+  const ajaxFileUpload = (file) => {
     var formData = new FormData();
     formData.append('file', file);
     $.ajax({
@@ -62,7 +63,7 @@
       return;
     }
 
-    ajaxFileUplaod(file);
+    ajaxFileUpload(file);
   });
 
 })();
