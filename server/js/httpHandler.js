@@ -11,6 +11,7 @@ module.exports.backgroundImageFile = path.join('.', 'background.jpg');
 ////////////////////////////////////////////////////////
 
 let messageQueue = null;
+
 module.exports.initialize = (queue) => {
   messageQueue = queue;
 };
@@ -21,8 +22,7 @@ module.exports.router = (req, res, next = ()=>{}) => {
       var commands = ['left', 'right', 'up', 'down'];
       var random = Math.floor(Math.random() * 4)
       res.writeHead(200, headers)
-      res.write(messageQueue.dequeue());
-      res.end();
+      res.end(messageQueue.dequeue());
     }
 
 
@@ -33,22 +33,6 @@ module.exports.router = (req, res, next = ()=>{}) => {
     res.end();
   }
 
-  // if (req.method === 'GET') {
-  //   res.writeHead(200, headers);
 
-  //   // res.write('left')
-  //   let command = ['up', 'down', 'left', 'right'];
-  //   let randomIndex = Math.floor(Math.random * 4);
-  //   console.log(res.end(command[randomIndex]))
-  //   res.write('left')
-  //   res.end();
-  // }
-/* req.body
-    res.bnody
-    req.header
-    res.header
-*/
-
-  // res.end();
   next(); // invoke next() at the end of a request to help with testing!
 };

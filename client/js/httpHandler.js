@@ -7,22 +7,22 @@
   //
 
 
-  const randomCommand = () => {
+  const fetchCommand = () => {
     $.ajax({
       url: serverUrl,
       // data: data,
       success: (command) => {
         console.log(command);
         SwimTeam.move(command);
-
-        // setTimeout(randomCommand, 2000);
-
+      },
+      complete: () => {
+        setTimeout(fetchCommand, 2000)
       },
       error: (err) => console.error(err)
     });
   }
 
-  randomCommand();
+  fetchCommand()
 
 
 
